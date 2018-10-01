@@ -1,0 +1,4 @@
+flask
+faker
+flask_script
+flask_migrate

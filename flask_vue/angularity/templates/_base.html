@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mstLab">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="(%url_for('static', filename='css/uikit.min.css')%)" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="(%url_for('static', filename='css/uikit-rtl.min.css')%)" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="(%url_for('static', filename='css/style.css')%)" onload="this.rel='stylesheet'">
+    <title>ТЗ - MSTLAB</title>
+</head>
+<body>
+    <!-- Navbar block -->
+    {% include "includes/_navbar.html" %}
+    <!-- Page DOM -->
+    <div class="uk-container">{% block content %}{% endblock %}</div>
+    <script src="(%url_for('static', filename='bower_components/vue/dist/vue.min.js')%)"></script>
+    <script src="(%url_for('static', filename='bower_components/vue-resource/dist/vue-resource.min.js')%)"></script>
+    <script src="(%url_for('static', filename='js/main.js')%)"></script>
+    <script src="(%url_for('static', filename='js/uikit.min.js')%)"></script>
+    <script src="(%url_for('static', filename='js/uikit-icons.min.js')%)"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <div class="side-wrap" id="main_menu" v-on:click="inside">
+        <div v-if="loader" v-bind:class="{ spinner: loader }">
+            <div uk-spinner="ratio: 3"></div>
+        </div>
+        <div v-if="blurActive" class="blur"></div>
+        <div class="wcontent" v-if="nav_menu.length > 0">
+            <div class="bread">
+                <ul>
+                    <li v-for="user in filteredItems"><a href="#" v-on:click="getUserBranches(user, user.id)">{{user}}</a></li>
+                </ul>
+            </div>
+            <div class="menu-header">
+                <h1>{{username}}</h1>
+                <template v-if="!blurActive">
+                    <a v-on:click="blurActive = true" class="uk-margin-small-right" uk-icon="chevron-down"></a>
+                </template>
+                <template v-else>
+                    <a v-on:click="blurActive = false" class="uk-margin-small-right" uk-icon="chevron-up"></a>
+                </template>
+            </div>
+            <div class="search-icon">
+                <a class="uk-margin-small-right" uk-icon="search"></a>
+            </div>
+            <div class="clear"></div>
+            <div class="dynamic" v-show="blurActive">
+                <button class="uk-button uk-button-default" v-on:click="switchLists()" :disabled="!newDataLoaded">Переключить</button>
+            </div>
+        </div>
+        <div class="mega" v-if="blurActive">
+            <div class="menu" v-click-outside="outside">
+                <ul>
+                    <h5 class="title">{{nav_menu[0].title}}</h5>
+                    <li v-for="val in nav_menu" v-if="val.name" v-on:click="getUserBranches(val.name, val.id)">
+                        <a href="#">{{val.name}}</a>
+                        <p>{{val.city}}</p>
+                    </li>
+                    <ul class="dropdown" v-show="show_branch">
+                        <h5 class="title">{{second_branch_menu[0].title}}</h5>
+                        <li v-for="val in second_branch_menu" v-if="val.name" v-on:click="getUserBranches(val.name, val.id);getMoreBranches(val.id)">
+                            <a href="#">{{val.name}}</a>
+                        </li>
+                        <ul class="dropdown" v-show="show_third_branch">
+                            <h5 class="title">{{third_branch_menu[0].title}}</h5>
+                            <li v-for="val in third_branch_menu" v-if="val.name" v-on:click="getUserBranches(val.name, val.id)">
+                                <a href="#">{{val.name}}</a>
+                            </li>
+                        </ul>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
