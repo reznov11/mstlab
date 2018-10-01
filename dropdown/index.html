@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mstLab">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/uikit.min.css" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="css/uikit-rtl.min.css" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="css/style.css" onload="this.rel='stylesheet'">
+    <title>ТЗ - MSTLAB</title>
+</head>
+<body>
+    <!-- Navbar block -->
+    <nav id="navbar">
+        <div class="wrap">
+            <div class="logo">
+                <img src="imgs/logo_sita.png" alt="Logo sita">
+            </div>
+        </div>
+        <div class="right-menu" id="navbar_1">
+            <p>
+                {{username}}
+            </p>
+            <small class="muted">{{welcomeMessage}}</small>
+        </div>
+    </nav>
+    <!-- Page DOM -->
+    <div class="uk-container">
+        <div class="side-wrap" id="main_menu">
+            <div class="wcontent">
+                <div class="menu-header">
+                    <h1>{{username}}</h1>
+                    <div class="uk-margin">
+                        <p uk-margin>
+                            <button id="sBu" class="uk-button uk-button-default uk-text-left" v-on:click="clickButton()">
+                                <template v-if="!menuOpened">
+                                    <span uk-icon="chevron-down"></span>
+                                </template>
+                                <template v-else>
+                                    <span uk-icon="chevron-up"></span>
+                                </template>
+                                Выбрано: {{selectedItems}}
+                            </button>
+                        </p>
+                        <!-- <p v-for="(key, value) in filteredList">{{key.name}}, {{value}}</p> -->
+                        <div id="itemsBody" class="uk-child-width-expand@s" v-if="menuOpened">
+                            <div class="uk-inline">
+                                <span class="uk-form-icon" uk-icon="icon: search"></span>
+                                <input id="iBu" class="uk-input" type="text" v-model="search">
+                            </div>
+                            <div class="content">
+                                <div class="uk-card uk-card-default uk-card-body" v-for="(key, value) in filteredList" :key="value">
+                                    <label><input class="uk-checkbox" type="checkbox" v-model="allChecked" :value="key.id" v-on:click="toggleSelect(value, key.id)" :checked="key.selected">{{key.name}}</label>
+                                </div>
+                            </div>
+                            <div class="uk-inline">
+                                <label>
+                                    <template v-if="!selectAll">
+                                        <input type="checkbox" id="sAll" class="switchButton uk-button uk-button-default" value="Отметить все" v-model="checkAll">
+                                    </template>
+                                    <template v-else>
+                                        <input type="checkbox" id="sAll" class="switchButton uk-button uk-button-default" value="Отменить все" v-model="uncheckAll">
+                                    </template>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+</body>
+</html>
