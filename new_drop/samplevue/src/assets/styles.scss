@@ -1,5 +1,5 @@
 @import 
-    url("https://mandragora.mstdev.ru/mandragora.css"),
+    url("https://mandragora.mstdev.ru/static/css/app.aca7be4c89f6b9d6a6eed82a85512c5e.css"),
     url("https://fonts.googleapis.com/css?family=Exo+2:100,200,300,400,500,600,700,800,900&amp;subset=cyrillic");
 
 body, html {
@@ -11,6 +11,11 @@ body, html {
     clear: both;
     display: table;
 }
+
+// .mt-3 {
+//     height: 40px !important;
+//     margin-top: 0px;
+// }
 
 .blur {
     background: rgba(0,0,0,.2);
@@ -54,7 +59,7 @@ body, html {
 .right-menu {
     margin: -4px 10px;
     position: absolute;
-    top: 0px;
+    top: 15px;
     right: 27px;
 }
 
@@ -83,25 +88,23 @@ body, html {
 
 .wcontent {
     width: 100%;
-    display: table;
-    height: 73px;
-    min-height: 73px;
     background: #fff;
     padding: 15px 15px;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-    padding-bottom: 25px;
+    -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .content {
-    height: 200px;
     margin-top: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
+    margin-bottom: 7px;
+    height: 170px;
 }
 
 .content_head {
     display: table;
-    margin: 7px 0px;
+    margin: 12px 0px;
     width: 100%;
 }
 
@@ -122,7 +125,6 @@ body, html {
 
 #itemsBody {
     width: 232px;
-    height: 280px;
     border-radius: 3px;
     box-shadow: 0 16px 24px 0 #00000023;
     border: solid 1px #f5f5f5;
@@ -137,6 +139,10 @@ body, html {
     border: solid 1.5px #0bb879;
     background-color: #ffffff;
     margin-bottom: 5px;
+}
+
+#sBu:hover {
+    cursor: pointer;
 }
 
 .textSbu {
@@ -183,7 +189,8 @@ input {
 
 #iBu {
     border: none;
-    min-width: 60%;
+    min-width: 85%;
+    float: right;
     height: 20px;
     font-family: "Exo 2";
     font-size: 14px;
@@ -216,29 +223,20 @@ input {
 .search_icon {
     width: 16px;
     height: 16px;
-    margin: -2px 5px;
+    margin: 1px 15px;
+    position: absolute;
+    left: 0%;
 }
 
 #sAll {
-    width: 100%;
+    min-width: 230px;
     background: #fff;
-    padding-top: 13px;
-    margin: 0;
     font-size: 12px;
     border: none;
 }
 
 #sAll:hover {
     border-color: #eee;
-}
-
-.uk-card-body {
-    padding: 15px 20px 10px 15px;
-}
-
-.uk-checkbox:checked, .uk-checkbox:indeterminate, .uk-radio:checked {
-    background-color: #0bb879 !important;
-    border-color: transparent;
 }
 
 .switchButton {
@@ -258,8 +256,6 @@ input {
 }
 
 .switchButton:after {
-    position: absolute;
-    top: 6%;
     display: block;
     width: 100%;
     height: 100%;
@@ -335,6 +331,10 @@ input {
     font-size: 20px;
     color: #555;
     margin-bottom: 15px;
+}
+
+.action label {
+    margin-bottom: 0px;
 }
 
 .spinner {

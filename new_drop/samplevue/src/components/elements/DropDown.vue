@@ -3,41 +3,42 @@
       <div class="side-wrap" id="main_menu">
         <div class="wcontent">
           <div class="menu-header">
-              <h1>{{username}}</h1>
-                <div class="col-sm-12">
-                    <button id="sBu" type="button" v-on:click="clickButton()">
-                        <img src="/static/imgs/chevron-icon.svg" class="chevron_icon" v-bind:class="{ animate_chevron: menuOpened }">
-                        <span class="textSbu" v-if="selectedItems == 0">
-                            Не выбрано
-                        </span>
-                        <span class="textSbu" v-else>
-                            Выбрано: {{selectedItems}}
-                        </span>
-                    </button>
-                    <div id="itemsBody" class="col-sm-6" v-if="menuOpened">
-                        <div class="content_head">
-                            <img src="/static/imgs/search-icon.svg" class="search_icon">
-                            <input id="iBu" type="text" class="form-control" v-model="search" placeholder="Поиск">
-                        </div>
-                        <div class="clear line"></div>
-                        <div class="content">
+                <h1>{{username}}</h1>
+                <button id="sBu" type="button" v-on:click="clickButton()">
+                    <img src="/static/imgs/chevron-icon.svg" class="chevron_icon" v-bind:class="{ animate_chevron: menuOpened }">
+                    <span class="textSbu" v-if="selectedItems == 0">
+                        Не выбрано
+                    </span>
+                    <span class="textSbu" v-else>
+                        Выбрано: {{selectedItems}}
+                    </span>
+                </button>
+                <div id="itemsBody" v-if="menuOpened">
+                    <div class="content_head">
+                        <img src="/static/imgs/search-icon.svg" class="search_icon">
+                        <input id="iBu" type="text" v-model="search" placeholder="Поиск">
+                    </div>
+                    <div class="clear line"></div>
+                    
+                    <div class="content">
+                        <div class="col-sm-12">
                             <div class="custom-control custom-checkbox mt-3" v-for="(key, value) in filteredList" :key="value">
-                                <input class="custom-control-input" type="checkbox" v-model="allChecked" :value="key.id" v-on:click="toggleSelect(value, key.id)" :checked="key.selected">
-                                <label class="custom-control-label">{{key.name}}</label>
+                                <input class="custom-control-input" type="checkbox" :id="'customCheck'+value" v-model="allChecked" :value="key.id" v-on:click="toggleSelect(value, key.id)" :checked="key.selected">
+                                <label class="custom-control-label" :for="'customCheck'+value">{{key.name}}</label>
                             </div>
                         </div>
-                        <div class="clear"></div>
-                        <div class="line"></div>
-                        <div class="col-sm-6">
-                            <label>
-                                <template v-if="!selectAll">
-                                    <input type="checkbox" id="sAll" class="switchButton uk-button uk-button-default" value="Отметить все" v-model="checkAll">
-                                </template>
-                                <template v-else>
-                                    <input type="checkbox" id="sAll" class="switchButton uk-button uk-button-default" value="Отменить все" v-model="uncheckAll">
-                                </template>
-                            </label>
-                        </div>
+                    </div>
+                    
+                    <div class="line clear"></div>
+                    <div class="action">
+                        <label>
+                            <template v-if="!selectAll">
+                                <input type="checkbox" id="sAll" class="switchButton form-control" value="Отметить все" v-model="checkAll">
+                            </template>
+                            <template v-else>
+                                <input type="checkbox" id="sAll" class="switchButton form-control" value="Отменить все" v-model="uncheckAll">
+                            </template>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -100,8 +101,6 @@
             toggleSelect: function(index, id){
                 if(this.selections[index].selected){
                     this.selections[index].selected = false
-                    // this.selectedItems = this.allChecked.length;
-                    // this.allChecked.push(item.id);
                 } else {
                     this.selections[index].selected = true;
                 }
@@ -147,8 +146,6 @@
             filteredList() {
                 if(this.search.length > this.min_symbols){
                     return this.selections.filter(item => {
-                        item.selected = true;
-                        this.allChecked.push(item.id);
                         return item.name.toLowerCase().includes(this.search.toLowerCase());
                     })
                 } else {
