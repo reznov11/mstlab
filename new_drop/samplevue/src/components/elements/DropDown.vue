@@ -40,6 +40,9 @@
                             </template>
                         </label>
                     </div>
+                    <p>
+                        {{miniSelect}}
+                    </p>
                 </div>
             </div>
         </div>
@@ -84,6 +87,7 @@
                 min_symbols: 3,
                 randomWords: null,
                 allChecked: [],
+                miniSelect: [],
                 selections: this.randomWords
             }
         },
@@ -105,7 +109,10 @@
                     this.selections[index].selected = true;
                 }
                 this.selectedItems = this.getSelected();             
-            }
+            },
+            addSelect: function(nameId){
+                return this.selections[nameId].selected = true;
+            },
         },
         computed: {
             checkAll: {
@@ -114,16 +121,21 @@
                 },
                 set: function(value){
                     var allChecked = [];
-                    console.log(allChecked.length);
                     if(value){
-                        this.selections.forEach(function(item){
-                            item.selected = true;
-                            allChecked.push(item.id);
-                        });
+                        if(this.miniSelect.length > 0){
+                            for(var i=0;i<this.miniSelect.length;i++){
+                                this.addSelect(i);
+                            }
+                        } else {
+                            this.selections.forEach(function(item){
+                                item.selected = true;
+                                allChecked.push(item.id);
+                            });
+                            this.allChecked = allChecked;
+                            this.selectAll = true;
+                        }
+                        this.selectedItems = allChecked.length ? this.miniSelect.length < 1 : this.miniSelect.length;
                     }
-                    this.allChecked = allChecked;
-                    this.selectedItems = allChecked.length;
-                    this.selectAll = true;
                 }
             },
             uncheckAll: {
@@ -145,10 +157,18 @@
             },
             filteredList() {
                 if(this.search.length > this.min_symbols){
+                    for(var i=0;i<this.selections.length;i++){
+                        if(!this.miniSelect.includes(i)){
+                            if(this.selections[i].name.includes(this.search)){
+                                this.miniSelect.push(this.selections[i].id);
+                            }
+                        }
+                    }
                     return this.selections.filter(item => {
                         return item.name.toLowerCase().includes(this.search.toLowerCase());
                     })
                 } else {
+                    this.miniSelect = [];
                     return this.selections;
                 }
             }
