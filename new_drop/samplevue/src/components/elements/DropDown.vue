@@ -40,9 +40,6 @@
                             </template>
                         </label>
                     </div>
-                    <p>
-                        {{miniSelect}}
-                    </p>
                 </div>
             </div>
         </div>
