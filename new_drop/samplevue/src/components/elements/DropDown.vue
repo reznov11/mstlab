@@ -75,28 +75,6 @@
                 )
             }
             this.randomWords = texts
-            this.randomWords = [
-                {
-                    'id':1,
-                    'name': "Ammar Zedan"
-                },
-                {
-                    'id':2,
-                    'name': "Reznov Zake"
-                },
-                {
-                    'id':3,
-                    'name': "Farhud Jabber"
-                },
-                {
-                    'id':4,
-                    'name': "Ammar Aseleh"
-                },
-                {
-                    'id':5,
-                    'name': "Zedan Moses"
-                }
-            ]
             return {
                 username: 'Нуждин Вячеслав',
                 search: '',
@@ -180,9 +158,10 @@
             },
             filteredList() {
                 if(this.search.length > this.min_symbols){
+                    this.miniSelect = [];
                     for(var i=0;i<this.selections.length;i++){
-                        if(!this.miniSelect.includes(i)){
-                            if(this.selections[i].name.includes(this.search)){
+                        if(this.selections[i].name.toLowerCase().includes(this.search.toLowerCase())){
+                            if(!this.miniSelect.includes(i)){
                                 this.miniSelect.push(this.selections[i].id);
                             }
                         }
