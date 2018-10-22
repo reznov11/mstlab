@@ -108,7 +108,8 @@
                 this.selectedItems = this.getSelected();             
             },
             addSelect: function(Id){
-                return this.selections[Id].selected = true;
+                this.selections[Id].selected = true;
+                return;
             },
         },
         computed: {
@@ -121,7 +122,7 @@
                     if(value){
                         if(this.miniSelect.length > 0){
                             for(var i=0;i<this.miniSelect.length;i++){
-                                this.addSelect(i);
+                                this.addSelect(this.miniSelect[i]);
                             }
                         } else {
                             this.selections.forEach(function(item){
