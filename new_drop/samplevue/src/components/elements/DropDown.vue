@@ -75,6 +75,28 @@
                 )
             }
             this.randomWords = texts
+            this.randomWords = [
+                {
+                    'id':1,
+                    'name': "Ammar Zedan"
+                },
+                {
+                    'id':2,
+                    'name': "Reznov Zake"
+                },
+                {
+                    'id':3,
+                    'name': "Farhud Jabber"
+                },
+                {
+                    'id':4,
+                    'name': "Ammar Aseleh"
+                },
+                {
+                    'id':5,
+                    'name': "Zedan Moses"
+                }
+            ]
             return {
                 username: 'Нуждин Вячеслав',
                 search: '',
@@ -107,8 +129,8 @@
                 }
                 this.selectedItems = this.getSelected();             
             },
-            addSelect: function(nameId){
-                return this.selections[nameId].selected = true;
+            addSelect: function(Id){
+                return this.selections[Id].selected = true;
             },
         },
         computed: {
@@ -131,7 +153,11 @@
                             this.allChecked = allChecked;
                             this.selectAll = true;
                         }
-                        this.selectedItems = allChecked.length ? this.miniSelect.length < 1 : this.miniSelect.length;
+                    }
+                    if(allChecked.length > 0){
+                        this.selectedItems = allChecked.length;
+                    } else {
+                        this.selectedItems = this.miniSelect.length;
                     }
                 }
             },
@@ -166,6 +192,7 @@
                     })
                 } else {
                     this.miniSelect = [];
+                    this.selectedItems = 0;
                     return this.selections;
                 }
             }
